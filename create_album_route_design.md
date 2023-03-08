@@ -9,11 +9,17 @@ You'll need to include:
   * the path
   * any query parameters (passed in the URL)
   * or body parameters (passed in the request body)
+```
+  # Method: POST
+      path: /albums
+  # Body parameters: 
+      title=voyage
+      release_year=2022
+      artist_id=2
+  # Expected Response (200 OK):
+      no content
+```
 
-  Method: GET
-  Path: /albums
-  Query: na
-  Params: na
 
 ## 2. Design the Response
 
@@ -26,18 +32,7 @@ Your response might return plain text, JSON, or HTML code.
 _Replace the below with your own design. Think of all the different possible responses your route will return._
 
 ```
-Surfer Rosa
-Waterloo
-Super Trouper
-Bossanova
-Lover
-Folklore
-I Put a Spell on You
-Baltimore
-Here Comes the Sun
-Fodder on My Wings
-Ring Ring
-
+response (200 OK), no content
 ```
 
 ## 3. Write Examples
@@ -45,26 +40,15 @@ Ring Ring
 _Replace these with your own design._
 
 ```
-# Request: 
-GET /albums
+# Request:
 
-# Expected Response:
+POST /albums
 
-Response for (200 OK)
+# Expected response:
 
-Surfer Rosa
-Waterloo
-Super Trouper
-Bossanova
-Lover
-Folklore
-I Put a Spell on You
-Baltimore
-Here Comes the Sun
-Fodder on My Wings
-Ring Ring
+Response for 200 OK
+ no content
 ```
-
 
 ## 4. Encode as Tests Examples
 
@@ -79,16 +63,14 @@ describe Application do
 
   let(:app) { Application.new }
 
-  context 'GET /albums' do
-    it 'returns the list of albums' do
-      response = get('/albums')
-      
-      expected_response = 'Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring'
+  context "POST/albums" do
+    it 'returns 200 OK' do
+      # Assuming the post with id 1 exists.
+      response = post('/albums', title: 'Voyage', release_year: '2022', artist_id: '2')
 
-      expect(response.status).to be 200
-      expect(response.body).to eq expected_response
+      expect(response.status).to eq(200)
+      # expect(response.body).to eq(expected_response)
     end
-  end
 end
 ```
 

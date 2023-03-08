@@ -12,6 +12,11 @@ describe AlbumRepository do
     reset_albums_table
   end
 
+
+  after (:all) do 
+    reset_albums_table
+  end
+
   it 'finds all albums' do
     repo = AlbumRepository.new
 
@@ -57,4 +62,5 @@ describe AlbumRepository do
     expect(albums.length).to eq(11)
     expect(albums.first.id).to eq(2)
   end
+
 end

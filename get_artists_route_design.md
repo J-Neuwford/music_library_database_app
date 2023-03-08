@@ -9,11 +9,13 @@ You'll need to include:
   * the path
   * any query parameters (passed in the URL)
   * or body parameters (passed in the request body)
+```
 
-  Method: GET
-  Path: /albums
-  Query: na
-  Params: na
+# Method: GET 
+# PAth: /artists
+
+```
+
 
 ## 2. Design the Response
 
@@ -26,18 +28,11 @@ Your response might return plain text, JSON, or HTML code.
 _Replace the below with your own design. Think of all the different possible responses your route will return._
 
 ```
-Surfer Rosa
-Waterloo
-Super Trouper
-Bossanova
-Lover
-Folklore
-I Put a Spell on You
-Baltimore
-Here Comes the Sun
-Fodder on My Wings
-Ring Ring
-
+Pixies
+ABBA
+Taylor Swift
+Nina Simone
+Kiasmos
 ```
 
 ## 3. Write Examples
@@ -45,26 +40,19 @@ Ring Ring
 _Replace these with your own design._
 
 ```
-# Request: 
-GET /albums
+# Request:
 
-# Expected Response:
+GET /artists
+
+# Expected response:
 
 Response for (200 OK)
-
-Surfer Rosa
-Waterloo
-Super Trouper
-Bossanova
-Lover
-Folklore
-I Put a Spell on You
-Baltimore
-Here Comes the Sun
-Fodder on My Wings
-Ring Ring
+ Pixies
+  ABBA
+  Taylor Swift
+  Nina Simone
+  Kiasmos
 ```
-
 
 ## 4. Encode as Tests Examples
 
@@ -79,11 +67,11 @@ describe Application do
 
   let(:app) { Application.new }
 
-  context 'GET /albums' do
-    it 'returns the list of albums' do
-      response = get('/albums')
-      
-      expected_response = 'Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring'
+  context 'GET /artists' do
+    it 'returns the list of artists' do
+      response = get('/artists')
+
+      expected_response = 'Pixies, ABBA, Taylor Swift, Nina Simone, Kiasmos'
 
       expect(response.status).to be 200
       expect(response.body).to eq expected_response
