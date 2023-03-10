@@ -26,17 +26,24 @@ Your response might return plain text, JSON, or HTML code.
 _Replace the below with your own design. Think of all the different possible responses your route will return._
 
 ```
-Surfer Rosa
-Waterloo
-Super Trouper
-Bossanova
-Lover
-Folklore
-I Put a Spell on You
-Baltimore
-Here Comes the Sun
-Fodder on My Wings
-Ring Ring
+<html>
+  <head></head>
+  <body>
+    <h1>Albums</h1>
+
+    <div>
+      Title: Doolittle
+      Released: 1989
+    </div>
+
+    <div>
+      Title: Surfer Rosa
+      Released: 1988
+    </div>
+
+    <!-- ... -->
+  </body>
+</html>
 
 ```
 
@@ -52,17 +59,24 @@ GET /albums
 
 Response for (200 OK)
 
-Surfer Rosa
-Waterloo
-Super Trouper
-Bossanova
-Lover
-Folklore
-I Put a Spell on You
-Baltimore
-Here Comes the Sun
-Fodder on My Wings
-Ring Ring
+<html>
+  <head></head>
+  <body>
+    <h1>Albums</h1>
+
+    <div>
+      Title: Doolittle
+      Released: 1989
+    </div>
+
+    <div>
+      Title: Surfer Rosa
+      Released: 1988
+    </div>
+
+    <!-- ... -->
+  </body>
+</html>
 ```
 
 
@@ -83,10 +97,15 @@ describe Application do
     it 'returns the list of albums' do
       response = get('/albums')
       
-      expected_response = 'Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring'
+      expected_response_1 = '<h1>Albums</h1>'
+      expected_response_2 = 'Title: Doolittle'
+      expected_response_3 = 'Released: 1989'
+
 
       expect(response.status).to be 200
-      expect(response.body).to eq expected_response
+      expect(response.body).to include expected_response_1
+      expect(response.body).to include expected_response_2
+      expect(response.body).to include expected_response_3
     end
   end
 end

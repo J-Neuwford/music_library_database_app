@@ -17,14 +17,12 @@ class Application < Sinatra::Base
   # albums.all
   get '/albums' do
     repo = AlbumRepository.new
-    albums = repo.all
+    @albums = repo.all.sort_by {|album| album.id }
 
-    response = albums.map do |album|
-      album.title
-    end.join(', ')
-
-    return response
+    return erb(:get_albums)
   end 
+
+  
 
   # albums.create
   post '/albums' do
@@ -41,13 +39,9 @@ class Application < Sinatra::Base
   #artists.all
   get '/artists' do
     repo = ArtistRepository.new
-    artists = repo.all
+    @artists = repo.all
 
-    response = artists.map do |artist|
-      artist.name
-    end.join(', ')
-
-    return response
+    return erb(:get_artists)
   end
 
   #artists.create
@@ -59,5 +53,31 @@ class Application < Sinatra::Base
 
     repo.create(new_artist)
     return ''
+  end
+
+  get '/hello' do
+    @name = params[:name]
+
+    return erb(:index)
+  end
+
+  #albums.find
+  get '/albums/:id' do
+    album_repo = AlbumRepository.new
+    artist_repo = ArtistRepository.new
+    id = params[:id]
+    @album = album_repo.find(id)
+    @artist = artist_repo.find(@album.artist_id)
+
+    return erb(:find_album)
+  end
+
+  # artists.find
+  get '/artists/:id' do
+    artist_repo = ArtistRepository.new
+    id = params[:id]
+    @artist = artist_repo.find(id)
+
+    return erb(:find_artist)
   end
 end
